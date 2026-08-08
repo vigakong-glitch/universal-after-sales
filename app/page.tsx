@@ -40,55 +40,55 @@ type Result = {
 const ISSUES: Issue[] = [
   {
     id: "effort",
-    symbol: "↻",
+    symbol: "忙",
     code: "ERR-017",
     title: "努力一直没有响应",
-    hint: "提交了很多，回来的只有“收到”",
+    hint: "忙了很久，只收到一句“收到”",
     fault: "努力有回音，但回的是“收到”",
     fragments: ["临时加活", "需求又改", "无效开会", "下班失败", "努力隐身", "周一太长"],
   },
   {
     id: "energy",
-    symbol: "◒",
+    symbol: "困",
     code: "PWR-008",
     title: "睡了但像没睡",
-    hint: "电量显示 80%，体感只剩 6%",
+    hint: "显示 80%，体感只剩 6%",
     fault: "精神电量存在不明泄漏",
     fragments: ["醒来就累", "脑子转圈", "咖啡失效", "夜里清醒", "白天待机", "电量虚标"],
   },
   {
     id: "signal",
-    symbol: "⌁",
+    symbol: "冷",
     code: "SIG-404",
     title: "人际信号忽冷忽热",
-    hint: "对方在线，关系却正在缓冲",
+    hint: "人在线，关系却还在缓冲",
     fault: "人际信号反复连接失败",
     fragments: ["突然冷淡", "过度解读", "对方装死", "想说没说", "聊天卡住", "关系待机"],
   },
   {
     id: "wallet",
-    symbol: "◎",
+    symbol: "穷",
     code: "GVT-088",
     title: "钱包出现引力异常",
-    hint: "钱只是短暂地经过了你的账户",
+    hint: "钱只是经过了一下账户",
     fault: "钱包遭遇局部引力塌缩",
     fragments: ["账单突袭", "冲动下单", "工资路过", "外卖超支", "月底漫长", "余额隐身"],
   },
   {
     id: "glitch",
-    symbol: "⚠",
+    symbol: "衰",
     code: "SYS-500",
     title: "最近小事都在报错",
-    hint: "没有大事，但每件小事都不配合",
+    hint: "每件小事都不太配合",
     fault: "生活连续触发非必要小型故障",
     fragments: ["错过电梯", "外卖洒了", "耳机没电", "地铁坐过", "忘带钥匙", "消息发错"],
   },
   {
     id: "unknown",
-    symbol: "…",
+    symbol: "累",
     code: "UNK-000",
     title: "说不上来，反正很累",
-    hint: "未发现具体问题，但本人已经不想动",
+    hint: "没什么问题，只是不想动",
     fault: "系统正常，你只是太累了",
     fragments: ["莫名烦躁", "不想说话", "什么都懒", "需要放空", "情绪缓冲", "暂不营业"],
   },
@@ -447,7 +447,7 @@ export default function Home() {
 
         {screen !== "welcome" && screen !== "archive" && (
           <div className="case-progress" aria-label={`办理进度 ${progress}/6`}>
-            <span>CASE PROCESS</span>
+            <span>STEP</span>
             <div className="progress-track"><i style={{ width: `${Math.max(5, (progress / 6) * 100)}%` }} /></div>
             <span>{String(progress).padStart(2, "0")}/06</span>
           </div>
@@ -468,7 +468,10 @@ export default function Home() {
               </div>
             </div>
             <p className="eyebrow">UNIVERSE AFTER-SALES CENTER</p>
-            <h1>宇宙售后<br />中心</h1>
+            <h1 className="hero-title" aria-label="宇宙售后中心">
+              <span className="title-line"><i>宇宙</i><i>售后</i></span>
+              <b>中心</b>
+            </h1>
             <p className="welcome-copy">宇宸运行异常？<br />本中心受理一些没办法的事。</p>
             <div className="clerk-note">
               <span className="note-avatar">✦</span>
@@ -480,7 +483,7 @@ export default function Home() {
             <button className="text-button" onClick={() => { setArchive(getStoredResults()); setScreen("archive"); }} disabled={!archive.length}>
               {archive.length ? `查看售后档案 · ${archive.length}` : "尚无售后档案"}
             </button>
-            <p className="disclaimer">纯娱乐服务 · 不负责改命 · 只负责替你说句公道话</p>
+            <p className="disclaimer">娱乐体验 · 不改命 · 只替你说句公道话</p>
           </div>
         )}
 
@@ -490,7 +493,7 @@ export default function Home() {
             <div className="section-heading">
               <p className="eyebrow">STEP 01 / 故障申报</p>
               <h2>最近是哪一部分<br />运行得不太对？</h2>
-              <p>请选择最想投诉的一项。其他的锅，我们稍后一起算。</p>
+              <p>选一个最想投诉的，其他的锅稍后再算。</p>
             </div>
             <div className="issue-grid">
               {ISSUES.map((item) => (
@@ -499,7 +502,7 @@ export default function Home() {
                   <span className="issue-code">{item.code}</span>
                   <b>{item.title}</b>
                   <small>{item.hint}</small>
-                  <i>提交此故障 →</i>
+                  <i>选这个 →</i>
                 </button>
               ))}
             </div>
@@ -549,7 +552,7 @@ export default function Home() {
             <div className="section-heading compact-heading">
               <p className="eyebrow">STEP 03 / 故障压缩</p>
               <h2>把这段霉运<br />压缩打包</h2>
-              <p>按住处理器，直到我们能把锅完整交给宇宙。</p>
+              <p>按住它，把这口锅完整还给宇宙。</p>
             </div>
             <div className={`compressor ${holding ? "is-active" : ""} ${compression >= 100 ? "is-done" : ""}`}>
               <div className="compress-orbit orbit-a" />
@@ -572,7 +575,14 @@ export default function Home() {
                 onKeyUp={(event) => { if (event.key === " " || event.key === "Enter") stopCompress(); }}
                 aria-label="长按压缩故障"
               >
-                <span style={{ transform: `scale(${1 - compression * 0.0045})` }}>×</span>
+                <span className="core-character" style={{ transform: `scale(${1 - compression * 0.0032})` }}>
+                  <i className="core-brow brow-left" />
+                  <i className="core-brow brow-right" />
+                  <i className="core-eye core-eye-left" />
+                  <i className="core-eye core-eye-right" />
+                  <i className="core-mouth" />
+                  <b>{compression >= 100 ? "好啦" : holding ? "别松" : "按住"}</b>
+                </span>
               </button>
               <div className="compression-value"><b>{Math.round(compression)}</b><span>%</span></div>
             </div>
@@ -594,7 +604,7 @@ export default function Home() {
             <div className="section-heading compact-heading">
               <p className="eyebrow">STEP 04 / 正式索赔</p>
               <h2>抓住时机<br />盖下受理章</h2>
-              <p>落在绿色受理区，售后员会偷偷帮你加急。</p>
+              <p>瞄准彩色区域，售后员会帮你加急。</p>
             </div>
             <div className={`stamp-machine ${stamp ? "stamped" : ""}`}>
               <div className="stamp-paper">
@@ -622,7 +632,7 @@ export default function Home() {
         {screen === "processing" && (
           <div className="screen processing-screen">
             <div className="processing-console">
-              <div className="scanner-disc"><span>✦</span></div>
+              <div className="scanner-disc"><span className="scanner-clerk"><i /></span></div>
               <p className="eyebrow">SYSTEM PROCESSING</p>
               <h2>宇宙正在处理<br />你的投诉</h2>
               <div className="console-lines">
@@ -643,7 +653,7 @@ export default function Home() {
             <div className="receipt">
               <div className="receipt-teeth top-teeth" />
               <div className="receipt-head">
-                <p>UNIVERSE AFTER-SALES CENTER</p>
+                <p>UNIVERSE SERVICE / 07</p>
                 <h2>宇宙售后工单</h2>
                 <span>处理时间 {result.date} · 窗口 07</span>
               </div>
