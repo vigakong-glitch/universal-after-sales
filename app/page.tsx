@@ -200,15 +200,15 @@ function downloadResultCard(result: Result) {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
 
-  ctx.fillStyle = "#071813";
+  ctx.fillStyle = "#bca0ff";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  const glow = ctx.createRadialGradient(820, 180, 10, 820, 180, 560);
-  glow.addColorStop(0, "rgba(121,255,181,.22)");
-  glow.addColorStop(1, "rgba(7,24,19,0)");
+  const glow = ctx.createRadialGradient(860, 160, 10, 860, 160, 620);
+  glow.addColorStop(0, "rgba(255,216,79,.85)");
+  glow.addColorStop(1, "rgba(188,160,255,0)");
   ctx.fillStyle = glow;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  ctx.strokeStyle = "rgba(151,255,194,.18)";
+  ctx.strokeStyle = "rgba(255,255,255,.2)";
   ctx.lineWidth = 2;
   for (let x = 70; x < 1030; x += 64) {
     ctx.beginPath();
@@ -223,62 +223,62 @@ function downloadResultCard(result: Result) {
     ctx.stroke();
   }
 
-  ctx.fillStyle = "#baffd3";
+  ctx.fillStyle = "#4f25ca";
   ctx.font = "700 32px ui-monospace, monospace";
   ctx.fillText("UNIVERSE AFTER-SALES CENTER", 76, 92);
-  ctx.fillStyle = "#f5f0dc";
+  ctx.fillStyle = "#17131c";
   ctx.font = "900 76px sans-serif";
   ctx.fillText("宇宙售后工单", 76, 190);
 
-  ctx.fillStyle = "#10271f";
-  ctx.strokeStyle = "#87f5b2";
-  ctx.lineWidth = 3;
+  ctx.fillStyle = "#fff9e9";
+  ctx.strokeStyle = "#17131c";
+  ctx.lineWidth = 8;
   ctx.beginPath();
   ctx.roundRect(64, 250, 952, 1000, 34);
   ctx.fill();
   ctx.stroke();
 
-  ctx.fillStyle = "#8eb29c";
+  ctx.fillStyle = "#665d76";
   ctx.font = "500 28px ui-monospace, monospace";
   ctx.fillText(`工单编号  ${result.id}`, 112, 320);
   ctx.fillText(`处理等级  ${result.level}`, 112, 372);
 
-  ctx.fillStyle = "#f5f0dc";
+  ctx.fillStyle = "#17131c";
   ctx.font = "800 50px sans-serif";
   wrapCanvasText(ctx, result.fault, 112, 470, 840, 70);
 
-  ctx.fillStyle = "#87f5b2";
+  ctx.fillStyle = "#7a45ff";
   ctx.font = "700 28px sans-serif";
   ctx.fillText("责任划分", 112, 620);
-  ctx.fillStyle = "#f5f0dc";
+  ctx.fillStyle = "#17131c";
   ctx.font = "800 42px sans-serif";
   ctx.fillText(`宇宙 ${result.universe}%   他人 ${result.others}%   你 ${result.self}%`, 112, 680);
 
-  ctx.fillStyle = "#87f5b2";
+  ctx.fillStyle = "#7a45ff";
   ctx.font = "700 28px sans-serif";
   ctx.fillText("赔偿方案", 112, 782);
-  ctx.fillStyle = "#f5f0dc";
+  ctx.fillStyle = "#17131c";
   ctx.font = "700 36px sans-serif";
   result.compensation.forEach((item, index) => ctx.fillText(`· ${item}`, 112, 846 + index * 62));
 
-  ctx.fillStyle = "#f05a3c";
+  ctx.fillStyle = "#ff5d78";
   ctx.save();
   ctx.translate(820, 1040);
   ctx.rotate(-0.1);
   ctx.lineWidth = 8;
-  ctx.strokeStyle = "#f05a3c";
+  ctx.strokeStyle = "#ff5d78";
   ctx.strokeRect(-150, -48, 300, 96);
   ctx.font = "900 42px sans-serif";
   ctx.textAlign = "center";
   ctx.fillText(result.stamp, 0, 16);
   ctx.restore();
 
-  ctx.fillStyle = "#c8d8cd";
+  ctx.fillStyle = "#4e465b";
   ctx.textAlign = "left";
   ctx.font = "500 31px sans-serif";
   wrapCanvasText(ctx, result.advice, 112, 1120, 720, 48);
 
-  ctx.fillStyle = "#87f5b2";
+  ctx.fillStyle = "#17131c";
   ctx.font = "700 30px sans-serif";
   ctx.fillText("经检测，这件事确实不能全怪你。", 76, 1346);
 
